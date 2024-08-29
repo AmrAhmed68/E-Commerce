@@ -1,0 +1,17 @@
+/* In your component CSS file (e.g., `product-details.component.css`) */
+
+h1 {
+  font-size: 2em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}

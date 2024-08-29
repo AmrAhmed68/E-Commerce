@@ -1,0 +1,54 @@
+<header class="header">
+  <div class="header-container">
+    <!-- Hamburger Menu Icon -->
+    <div class="menu-toggle" (click)="toggleSidebar()">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo">
+      <a href="/">
+        <img src="assets/logo.png" alt="Company Logo">
+      </a>
+    </div>
+
+    <!-- Navigation Menu (desktop) -->
+    <nav class="nav">
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/products">products</a></li>
+        <li><a routerLink="/cart">Cart({{ cartCount }})</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+        <li>
+          <a *ngIf="isLoggedIn()" routerLink="/account/profile"><i class="fas fa-user"> </i> Hi {{username}}!</a>
+          <a *ngIf="!isLoggedIn()" routerLink="/account/login"><i class="fas fa-user"></i> Login</a>
+        </li>
+      </ul>
+    </nav>
+
+
+  </div>
+
+  <!-- Sidebar for mobile view -->
+  <div class="sidebar" [class.active]="isSidebarOpen">
+    <div class="close-btn" (click)="toggleSidebar()">
+      <i class="fas fa-times"></i>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a *ngIf="isLoggedIn()" routerLink="/account/profile"><i class="fas fa-user"> </i> Hi {{username}}!</a>
+          <a *ngIf="!isLoggedIn()" routerLink="/account/login"><i class="fas fa-user"></i> Login</a>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/shop">Shop</a></li>
+        <li><a routerLink="/cart">Cart({{ cartCount }})</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>

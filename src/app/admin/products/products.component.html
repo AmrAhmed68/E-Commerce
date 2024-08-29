@@ -1,0 +1,74 @@
+<div class="admin-container">
+  <h2>Admin Dashboard</h2>
+
+  <!-- Add or Edit Product Form -->
+  <div class="product-form">
+    <h3>{{ selectedProduct ? 'Edit Product' : 'Add New Product' }}</h3>
+
+    <form [formGroup]="productForm" (ngSubmit)="selectedProduct ? updateProduct() : addProduct()">
+      <label for="name">Product Name</label>
+      <input id="name" formControlName="name" type="text" required>
+
+      <label for="price">Price</label>
+      <input id="price" formControlName="price" type="number" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+
+      <label for="imageUrl">Image URL</label>
+      <input id="imageUrl" formControlName="imageUrl" type="text">
+
+      <label for="quantity">quantity</label>
+      <input id="quantity" formControlName="quantity" type="text">
+
+      <label for="category">category</label>
+      <select id="category" formControlName="category">
+        <option value="Laptops">Laptops</option>
+        <option value="Phone">Phone</option>
+        <option value="Earphones">Earphones</option>
+        <option value="Accessories">Accessories</option>
+      </select>
+
+      <label for="subCategory">subCategory</label>
+      <select id="subCategory" formControlName="subCategory">
+        <option value="mostPopular">mostPopular</option>
+        <option value="leastPopular">leastPopular</option>
+        <option value="bestOffers">bestOffers</option>
+      </select>
+
+      <label for="brand">brand</label>
+      <input id="brand" formControlName="brand" type="text">
+
+      <button type="submit">{{ selectedProduct ? 'Update Product' : 'Add Product' }}</button>
+      <button type="button" *ngIf="selectedProduct" (click)="resetForm()">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Product List -->
+  <div class="product-list">
+    <h3>Product List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.description }}</td>
+          <td><img [src]="product.imageUrl" alt="{{ product.name }}"></td>
+          <td>
+            <button (click)="selectProduct(product)">Edit</button>
+            <button (click)="deleteProduct(product._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

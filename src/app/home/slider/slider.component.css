@@ -1,0 +1,15 @@
+.carousel-item img {
+  height: 500px;
+  width: 100%;
+  object-fit: fill;
+  border-radius: 20px;
+  border-color: #f90;
+  border-width: 2px;
+  border-style: solid;
+  margin-top: 20px;
+}
+
+#carouselExample{
+  width: 90%;
+  margin: 0 auto;
+}

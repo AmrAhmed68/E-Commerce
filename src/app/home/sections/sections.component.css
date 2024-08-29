@@ -1,0 +1,91 @@
+/* In your component CSS file (e.g., `home.component.css`) */
+
+.home-container {
+  padding: 20px;
+}
+
+.product-section {
+  margin-bottom: 40px;
+}
+
+.product-list {
+    /* display: flex; */
+  flex-wrap: wrap;
+}
+
+/* Products Container */
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px; /* Space between cards */
+  padding: 20px;
+  cursor: pointer;
+
+}
+
+/* Product Card */
+.product-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-details {
+  padding: 15px;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.add-to-cart-btn {
+  background-color: #f90;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: rgb(157, 101, 17);
+}
+
+.add-to-cart-btn i {
+  margin-right: 8px; /* Space between icon and text */
+}
+

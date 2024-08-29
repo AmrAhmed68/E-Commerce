@@ -1,0 +1,46 @@
+<div class="body">
+  <div class="form-container">
+    <form [formGroup]="myForm!" (ngSubmit) = 'submitForm()'>
+      <h1>Login</h1>
+
+      <!-- Email Input -->
+      <div class="form-group">
+        <label for="text">Email <span class="red">*</span></label>
+        <input type="text" placeholder="Enter username" formControlName="username">
+        <div class="msg" *ngIf = "myForm.get('username')?.invalid && myForm.get('username')?.touched">
+          <div class="msg" *ngIf = "myForm.get('username')?.errors?.['required']">
+          *username is required
+        </div>
+        <!-- <div class="msg" *ngIf = "myForm.get('email')?.errors?.['email']" >
+          *Ay 7Aga
+        </div> -->
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div class="form-group">
+        <label for="password">Password <span class="red">*</span></label>
+        <input type="password" placeholder="Enter password" formControlName="password">
+        <div class="msg" *ngIf = "myForm.get('password')?.invalid && myForm.get('password')?.touched">
+          <div class="msg" *ngIf = "myForm.get('password')?.errors?.['required']">
+          *password is required
+        </div>
+        <div class="msg" *ngIf = "myForm.get('password')?.errors?.['passwordstrength']" >
+          *password must be strong
+        </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="account">Don't have account ? <a class="signup"  routerLink="/account/signup"> SignUp</a></p>
+
+        <p class="account">forget password ? <a class="password"   routerLink="forgetPassword"> password reset</a></p>
+      </div>
+
+      <!-- Submit Button -->
+      <div id="submitBtn" class="form-group text-center" >
+        <input type="submit" value="Login" />
+      </div>
+    </form>
+  </div>
+</div>

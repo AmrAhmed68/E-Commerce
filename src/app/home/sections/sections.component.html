@@ -1,0 +1,63 @@
+<!-- In your component HTML file (e.g., `home.component.html`) -->
+
+<div class="home-container">
+  <section class="product-section">
+    <h2>Most Popular</h2>
+    <div class="product-list">
+    <div class="products-container">
+  <div class="product-card" *ngFor="let product of mostPopular" >
+    <img [src]="product.imageUrl" (click)="viewProductDetails(product._id)" alt="{{ product.name }}" class="product-image">
+    <div class="product-details">
+      <h2 class="product-title">{{ product.name }}</h2>
+      <p class="product-description">{{ product.description }}</p>
+      <p class="product-price">{{ product.price | currency }}</p>
+      <button class="add-to-cart-btn" >
+        <i class="fas fa-shopping-cart"></i> Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </section>
+
+  <section class="product-section">
+    <h2>Least Popular</h2>
+    <div class="product-list">
+      <div class="products-container">
+        <div class="product-card" *ngFor="let product of leastPopular">
+          <img [src]="product.imageUrl" (click)="viewProductDetails(product._id)" alt="{{ product.name }}" class="product-image">
+          <div class="product-details">
+            <h2 class="product-title">{{ product.name }}</h2>
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-price">{{ product.price | currency }}</p>
+            <button class="add-to-cart-btn">
+              <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="product-section">
+    <h2>Best Offers</h2>
+    <div class="product-list">
+      <div class="products-container">
+        <div class="product-card"  *ngFor="let product of bestOffers">
+          <img [src]="product.imageUrl" (click)="viewProductDetails(product._id)" alt="{{ product.name }}" class="product-image">
+          <div class="product-details">
+            <h2 class="product-title">{{ product.name }}</h2>
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-price">{{ product.price | currency }}</p>
+            <button class="add-to-cart-btn">
+              <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>

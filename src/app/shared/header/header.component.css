@@ -1,0 +1,271 @@
+  /* Base Header Styles */
+  .header {
+    background-color: #fff;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  /* Header container for layout */
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Logo */
+  .logo img {
+    height: 50px;
+  }
+
+  /* Navigation styles */
+  .nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav ul li {
+    margin: 0 15px;
+  }
+
+  .nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 0;
+    position: relative;
+  }
+
+  .nav ul li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #f90;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .nav ul li a:hover::after {
+    width: 100%;
+  }
+
+  /* Account, cart, and mobile menu actions */
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-actions .account,
+  .header-actions .cart {
+    margin-left: 20px;
+  }
+
+  .header-actions a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-actions i {
+    margin-right: 8px;
+  }
+
+  /* Mobile menu toggle */
+  .menu-toggle {
+    display: none;
+    cursor: pointer;
+  }
+
+  /* Mobile navigation */
+  .mobile-nav {
+    display: none;
+    background-color: #fff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-nav ul li {
+    margin: 10px 0;
+  }
+
+  .mobile-nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .logo {
+      margin-left: 0;
+      margin-right: auto;
+      text-align: right;
+      width: 100%;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .menu-toggle {
+      position: static;
+      margin-bottom: 15px;
+    }
+
+    .search-bar {
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .header-actions .account,
+    .header-actions .cart {
+      margin-left: 10px;
+    }
+
+    .header-actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .cart {
+      margin-right: 10px;
+    }
+
+    .sidebar {
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-container {
+      padding: 0 10px;
+    }
+    .search-bar input {
+      font-size: 14px;
+    }
+
+    .search-bar button {
+      padding: 8px 15px;
+    }
+
+    .header-actions i {
+      margin-right: 5px;
+    }
+  }
+
+  .mobile-nav.ng-trigger.ng-trigger-expand {
+    display: block;
+  }
+
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-nav ul li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #444;
+  }
+
+  .sidebar-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    z-index: 999;
+    padding-top: 60px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 18px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+  }
+  .sea-car {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Correct unit */
+  }
+

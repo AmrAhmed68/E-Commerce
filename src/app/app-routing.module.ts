@@ -8,12 +8,15 @@ import { SignupComponent } from './account/components/signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './account/components/profile/profile.component';
 import { ProductsComponent } from './admin/products/products.component';
+import { AdminComponent  } from './admin/admin.component';
+
 
 const routes: Routes = [
   {path : "products" , component:AllProductsComponent},
   {path : "home" , component: HomeComponent},
   {path : "product/:id" , component:ProductsDetailsComponent},
-  {path : "admin" , component:ProductsComponent},
+  {path : "admin" , component:AdminComponent},
+  {path : "adminproducts" , component:ProductsComponent},
   { path: 'account/login', component: LoginComponent },
   { path: 'account/signup', component: SignupComponent },
   { path: 'account/profile', component: ProfileComponent },

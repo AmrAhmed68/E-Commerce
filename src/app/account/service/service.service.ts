@@ -9,18 +9,12 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:5000/api/auth';  // Your backend URL
+  private baseUrl = 'http://localhost:5000/api/auth';
 
   constructor(private http: HttpClient) {}
 
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/login`, credentials).pipe(
-      tap(user => {
-        if (user && user.token) {
-          localStorage.setItem('authToken', user.token);
-          localStorage.setItem('isAdmin', user.isAdmin); // Save admin status
-        }
-      })
     );
   }
 
@@ -28,7 +22,5 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/signup`, user);
   }
 
-  // login(credentials: any): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/login`, credentials);
-  // }
+
 }

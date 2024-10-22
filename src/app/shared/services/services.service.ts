@@ -13,8 +13,11 @@ export class AuthService {
 
   constructor(private http: HttpClient , private router : Router) {}
 
-  private apiUrl = 'http://localhost:5000/api/auth';
+  getLogo(): Observable<any> {
+    return this.http.get<{ logoUrl: string }>('http://localhost:5000/api/auth');
+  }
 
+  private apiUrl = 'http://localhost:5000/api/auth';
 
   login(credentials : any ): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
@@ -22,12 +25,13 @@ export class AuthService {
         if (response.token) {
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
-          this.authStatus.next(true);
-          isAdmin: response.isAdmin
-          localStorage.setItem('isAdmin' , response.isAdmin)
+          localStorage.setItem('isAdmin' , JSON.stringify(response.isAdmin))
         }
       })
     );
+  }
+  uploadLogo(formData: FormData) {
+    return this.http.post(`${this.apiUrl}/upload`, formData);
   }
 
   getUser(): any {

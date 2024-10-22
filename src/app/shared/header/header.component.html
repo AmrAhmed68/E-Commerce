@@ -1,3 +1,4 @@
+
 <header class="header">
   <div class="header-container">
     <!-- Hamburger Menu Icon -->
@@ -9,11 +10,13 @@
       </div>
     </div>
 
-    <!-- Logo -->
-    <div class="logo">
-      <a href="/">
-        <img src="assets/logo.png" alt="Company Logo">
-      </a>
+
+    <div *ngIf="isAdmin">
+      <h3>Upload Logo</h3>
+      <form (submit)="onSubmit()" enctype="multipart/form-data">
+        <input type="file" (change)="onFileSelected($event)" />
+        <button type="submit">Upload</button>
+      </form>
     </div>
 
     <!-- Navigation Menu (desktop) -->

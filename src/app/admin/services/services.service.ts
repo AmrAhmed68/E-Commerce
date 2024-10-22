@@ -37,4 +37,5 @@ export class ServicesService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<any>(`${this.apiUrl}/${productId}`, { headers });
   }
+  
 }

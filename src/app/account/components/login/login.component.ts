@@ -27,19 +27,16 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginData).subscribe({
         next: (response) => {
           console.log('Login successful', response);
-          
+
           const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-          // const isAdmin = response.isAdmin;
           const isAdmin = user.isAdmin;
-
+          localStorage.setItem('isAdmin' , JSON.stringify(isAdmin));
 
           if (typeof isAdmin === 'undefined') {
             console.error('isAdmin is not defined in the response');
             return;
           }
-
-          localStorage.setItem('authToken', response.token); // Store token
 
           if (isAdmin) {
             this.router.navigate(['/admin']); // Redirect to admin dashboard

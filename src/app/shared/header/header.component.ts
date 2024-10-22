@@ -10,12 +10,16 @@ import {ServicesService} from '../../carts/services/services.service'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+  selectedFile: File | null = null;
   username: string | null = null;
   isSidebarOpen = false;
   isProfileOpen = false;
   showSearchBar = true;
   currentRoute: string = '';
   cartCount: number = 0;
+  isAdmin = false;
+
 
 
   constructor(private authService: AuthService, private router: Router , private cartService: ServicesService  ) {}
@@ -33,35 +37,57 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
+  onSubmit() {
+    if (!this.selectedFile) {
+      alert('Please select an image');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', this.selectedFile);
+
+    this.authService.uploadLogo(formData).subscribe(
+      (response: any) => {
+        console.log('Logo uploaded successfully:', response);
+      },
+      error => {
+        console.error('Error uploading logo:', error);
+      }
+    );
+  }
     isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  // Toggle sidebar for mobile view
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  // Check login status and set username
   checkLoginStatus() {
     this.authService.authStatus$.subscribe(isLoggedIn => {
       this.username = isLoggedIn ? this.authService.getUser()?.username : null;
+      this.isAdmin = isLoggedIn ? JSON.parse(localStorage.getItem('user') || '{}').isAdmin === true : false;
       this.updateVisibility();
+      console.log(this.isAdmin)
     });
   }
 
-  // Update visibility of search bar and profile section
   updateVisibility() {
     const excludedRoutes = ['/account/login', '/account/signup', '/account/profile'];
     this.showSearchBar = !excludedRoutes.includes(this.currentRoute);
   }
 
-  // Toggle profile dropdown
   toggleProfileDropdown() {
     this.isProfileOpen = !this.isProfileOpen;
   }
 
-  // Log out user
   logout() {
     this.authService.logout();
   }

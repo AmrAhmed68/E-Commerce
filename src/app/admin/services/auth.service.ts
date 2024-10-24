@@ -20,11 +20,12 @@ export class AuthService {
   }
 
   // Get logged-in user details
-  getUser(): any {
+  getUser(): Observable<any> {
     const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get(`${this.apiUrl}/user`, { headers });
   }
+
 
   // Log out the user
   logout(): Observable<any> {

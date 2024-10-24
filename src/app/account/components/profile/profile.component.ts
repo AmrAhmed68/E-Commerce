@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../shared/services/services.service';
 import { Router } from '@angular/router';
+import { AuthServices } from '../../service/service.service'
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -11,65 +13,54 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profileForm: FormGroup;
-  userId: string | null = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.profileForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      age: ['', Validators.required],
-      phone: ['', Validators.required],
-      gender: ['', Validators.required]
+profileData: any;
+
+ profile: any = {};
+
+  constructor(private profileService: AuthServices , private authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.getProfile();
+  }
+
+  getProfile() {
+    this.profileService.getProfile().subscribe(data => {
+      this.profile = data;
+    }, error => {
+      console.error('Error fetching profile data', error);
+    });
+
+  }
+
+  // getProfile() {
+  //   this.profileService.getProfile().subscribe(
+  //     (data) => {
+  //       this.profileData = data;
+  //       console.log('Profile data fetched successfully', data);
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       console.error('Error fetching profile data', error);
+  //       if (error.status === 401) {
+  //         console.log('Unauthorized: Token may be missing or expired');
+  //       } else if (error.status === 403) {
+  //         console.log('Forbidden: Token might be invalid');
+  //       } else {
+  //         console.log('An unknown error occurred');
+  //       }
+  //     }
+  //   );
+  // }
+
+  onSubmit() {
+    this.profileService.updateProfile(this.profile).subscribe(response => {
+      console.log('Profile updated successfully', response);
+    }, error => {
+      console.error('Error updating profile', error);
     });
   }
 
-  ngOnInit(): void {
-    this.loadUserProfile();
-  }
-
-  logout(): void {
+  logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
-  loadUserProfile(): void {
-    const user = this.authService.getUser();
-    if (user && user._id) {
-      this.userId = user._id;
-      this.authService.getUserById(this.userId).subscribe({
-        next: (userData) => {
-          this.profileForm.patchValue({
-            username: userData.username || '',
-            email: userData.email || '',
-            age: userData.age || '',
-            phone: userData.phone || '',
-            gender: userData.gender || '',
-          });
-        },
-        error: (error) => {
-          console.error('Error loading user profile', error);
-        }
-      });
-    }
-  }
-
-  onSubmit(): void {
-    if (this.profileForm.valid && this.userId) {
-      const updatedProfile = { ...this.profileForm.value, userId: this.userId };
-      this.authService.updateUser(updatedProfile).subscribe({
-        next: (response) => {
-          console.log('Profile updated successfully', response);
-          // Optionally, navigate to another page or show a success message
-        },
-        error: (error) => {
-          console.error('Error updating profile', error);
-        }
-      });
-    }
   }
 }

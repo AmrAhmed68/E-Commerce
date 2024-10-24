@@ -9,7 +9,6 @@
     z-index: 1000;
   }
 
-  /* Header container for layout */
   .header-container {
     display: flex;
     align-items: center;
@@ -19,12 +18,16 @@
     padding: 0 20px;
   }
 
-  /* Logo */
-  .logo img {
-    height: 50px;
+  .img{
+    display: flex;
+    align-items: center;
+    max-width: 5%;
   }
 
-  /* Navigation styles */
+  .nav {
+    max-width: 80%;
+  }
+
   .nav ul {
     display: flex;
     list-style: none;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
@@ -13,11 +13,20 @@ export class AuthService {
 
   constructor(private http: HttpClient , private router : Router) {}
 
-  getLogo(): Observable<any> {
-    return this.http.get<{ logoUrl: string }>('http://localhost:5000/api/auth');
-  }
 
   private apiUrl = 'http://localhost:5000/api/auth';
+
+  // login(credentials : any ): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+  //     tap((response: any) => {
+  //       if (response.token) {
+  //         localStorage.setItem('authToken', response.token);
+  //         localStorage.setItem('user', JSON.stringify(response.user));
+  //         localStorage.setItem('isAdmin' , JSON.stringify(response.isAdmin))
+  //       }
+  //     })
+  //   );
+  // }
 
   login(credentials : any ): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
@@ -25,13 +34,24 @@ export class AuthService {
         if (response.token) {
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
-          localStorage.setItem('isAdmin' , JSON.stringify(response.isAdmin))
+          localStorage.setItem('isAdmin', JSON.stringify(response.isAdmin));
+
+          // Notify subscribers that login has occurred
+          this.authStatus.next(true);
         }
       })
     );
   }
-  uploadLogo(formData: FormData) {
-    return this.http.post(`${this.apiUrl}/upload`, formData);
+
+
+  getLogo(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/logo`);
+  }
+
+  uploadLogo(data: { imageUrl: string }): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${this.apiUrl}/uploads`, data , {headers});
   }
 
   getUser(): any {
@@ -45,6 +65,7 @@ export class AuthService {
   getUserData(): any {
     return this.http.get(`${this.apiUrl}/users`)
   }
+
   updateUser(profileData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/updateProfile`, profileData);
   }
@@ -60,6 +81,10 @@ export class AuthService {
       return false;
   }
 
+  signUp(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/signup`, user);
+  }
+
   logout() {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
     localStorage.removeItem('authToken');
@@ -67,9 +92,6 @@ export class AuthService {
     this.authStatus.next(false);
     this.router.navigate(['/home']);
     }
-  }
-  signUp(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signup`, user);
   }
 
 }

@@ -1,6 +1,6 @@
   /* Base Header Styles */
   .header {
-    background-color: #fff;
+    background-color: #f90;
     padding: 15px 0;
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -40,7 +40,7 @@
   }
 
   .nav ul li a {
-    color: #333;
+    color: #e0e0e0;
     text-decoration: none;
     font-weight: 600;
     padding: 10px 0;
@@ -52,7 +52,7 @@
     display: block;
     width: 0;
     height: 2px;
-    background-color: #f90;
+    background-color: #e0e0e0;
     transition: width 0.3s;
     position: absolute;
     bottom: 0;

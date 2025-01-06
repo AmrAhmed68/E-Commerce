@@ -8,27 +8,27 @@ import { Router } from '@angular/router';
 })
 export class SectionsComponent implements OnInit {
 
-  mostPopular: any[] = [];
-  leastPopular: any[] = [];
-  bestOffers: any[] = [];
+  MostPopular: any[] = [];
+  LastAdded: any[] = [];
+  BestOffers: any[] = [];
 
   constructor(private productService: PhotoService , private router : Router) {}
 
   ngOnInit(): void {
-    this.loadProducts('mostPopular'); // Load products for "Most Popular"
-    this.loadProducts('leastPopular'); // Load products for "Least Popular"
-    this.loadProducts('bestOffers');   // Load products for "Best Offers"
+    this.loadProducts('Most Popular');
+    this.loadProducts('Last Added');
+    this.loadProducts('Best Offers');
   }
 
   loadProducts(subCategory: string): void {
     this.productService.getProducts(subCategory).subscribe({
       next: (response) => {
-        if (subCategory === 'mostPopular') {
-          this.mostPopular = response.mostPopular;
-        } else if (subCategory === 'leastPopular') {
-          this.leastPopular = response.leastPopular;
-        } else if (subCategory === 'bestOffers') {
-          this.bestOffers = response.bestOffers;
+        if (subCategory === 'Most Popular') {
+          this.MostPopular = response;
+        } else if (subCategory === 'Last Added') {
+          this.LastAdded = response;
+        } else if (subCategory === 'Best Offers') {
+          this.BestOffers = response;
         }
       },
       error: (error) => {

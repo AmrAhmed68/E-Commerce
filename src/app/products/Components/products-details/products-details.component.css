@@ -1,17 +1,148 @@
-/* In your component CSS file (e.g., `product-details.component.css`) */
-
-h1 {
-  font-size: 2em;
+/* Reset and Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
 }
 
-p {
-  font-size: 1.2em;
-  margin: 10px 0;
+.container {
+  max-width: 90%;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Product Details Page */
+.product-details-page {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.header {
+  background-color: #f90;
+  color: #fff;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.content {
+  background-color: #d8d6d6;
+  padding: 2rem;
+  text-align: center;
+}
+
+.product-image {
+  width: 60%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.info-section {
+  flex: 1;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+.description {
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.meta-info {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.meta-info li {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.meta-info li strong {
+  color: #f90;
+}
+
+.action-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #f90;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+  background-color: #8f959c;
+}
+
+/* Color Circle */
+.color-options {
+  text-align: center;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-section {
+    padding: 1rem 0;
+  }
+  .meta-info li {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .action-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  .meta-info li {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
 }

@@ -5,11 +5,16 @@
     <h2>Most Popular</h2>
     <div class="product-list">
     <div class="products-container">
-  <div class="product-card" *ngFor="let product of mostPopular" >
-    <img [src]="product.imageUrl" (click)="viewProductDetails(product._id)" alt="{{ product.name }}" class="product-image">
+  <div class="product-card" *ngFor="let product of MostPopular" >
+    <div class="product-image-container">
+      <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" (click)="viewProductDetails(product._id)">
+      <button class="favorite-btn" >
+        <i class="fas fa-heart"></i>
+      </button>
+    </div>
     <div class="product-details">
       <h2 class="product-title">{{ product.name }}</h2>
-      <p class="product-description">{{ product.description }}</p>
+      <p class="product-description">{{ product.brand }}</p>
       <p class="product-price">{{ product.price | currency }}</p>
       <button class="add-to-cart-btn" >
         <i class="fas fa-shopping-cart"></i> Add to Cart
@@ -17,7 +22,6 @@
     </div>
   </div>
 </div>
-
     </div>
   </section>
 
@@ -25,13 +29,18 @@
     <h2>Least Popular</h2>
     <div class="product-list">
       <div class="products-container">
-        <div class="product-card" *ngFor="let product of leastPopular">
-          <img [src]="product.imageUrl" (click)="viewProductDetails(product._id)" alt="{{ product.name }}" class="product-image">
+        <div class="product-card" *ngFor="let product of LastAdded">
+          <div class="product-image-container">
+            <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" (click)="viewProductDetails(product._id)">
+            <button class="favorite-btn" >
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
           <div class="product-details">
             <h2 class="product-title">{{ product.name }}</h2>
-            <p class="product-description">{{ product.description }}</p>
+            <p class="product-description">{{ product.brand }}</p>
             <p class="product-price">{{ product.price | currency }}</p>
-            <button class="add-to-cart-btn">
+            <button class="add-to-cart-btn" >
               <i class="fas fa-shopping-cart"></i> Add to Cart
             </button>
           </div>
@@ -45,13 +54,18 @@
     <h2>Best Offers</h2>
     <div class="product-list">
       <div class="products-container">
-        <div class="product-card"  *ngFor="let product of bestOffers">
-          <img [src]="product.imageUrl" (click)="viewProductDetails(product._id)" alt="{{ product.name }}" class="product-image">
+        <div class="product-card"  *ngFor="let product of BestOffers">
+          <div class="product-image-container">
+            <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" (click)="viewProductDetails(product._id)">
+            <button class="favorite-btn" >
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
           <div class="product-details">
             <h2 class="product-title">{{ product.name }}</h2>
-            <p class="product-description">{{ product.description }}</p>
+            <p class="product-description">{{ product.brand }}</p>
             <p class="product-price">{{ product.price | currency }}</p>
-            <button class="add-to-cart-btn">
+            <button class="add-to-cart-btn" >
               <i class="fas fa-shopping-cart"></i> Add to Cart
             </button>
           </div>

@@ -1,6 +1,8 @@
 .profile-container {
-  max-width: 500px;
-  margin: 0 auto ;
+  margin-top: 50px;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -44,4 +46,12 @@
 
 .btn:hover {
   background-color: #0056b3;
+}
+@media (max-width: 768px) {
+  .profile-container {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+  }
+  
 }

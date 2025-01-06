@@ -1,13 +1,35 @@
-<!-- In your component HTML file (e.g., `product-details.component.html`) -->
+<div class="product-details-page" *ngIf="product">
+  <div class="container">
+    <!-- Product Header -->
+    <div class="header">
+      <h1>{{ product.name }}</h1>
+    </div>
 
-<div *ngIf="product">
-  <h1>{{ product.name }}</h1>
-  <img [src]="product.imageUrl" alt="{{ product.name }}">
-  <p>{{ product.description }}</p>
-  <p>Price: ${{ product.price }}</p>
-  <p>Quantity Available: {{ product.quantity }}</p>
-  <p>Category: {{ product.category }}</p>
-  <p>Sub-Category: {{ product.subCategory }}</p>
-  <p>Brand: {{ product.brand }}</p>
+    <!-- Content Wrapper -->
+    <div class="content">
+      <!-- Product Image -->
+        <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" />
+
+      <!-- Product Info -->
+      <div class="info-section">
+        <ul class="meta-info">
+          <li><strong>Price:</strong> {{ product.price }}$</li>
+          <li><strong>Quantity Available:</strong> {{ product.size }}</li>
+          <li class="color-options"><strong>Colors Available:</strong>
+              <span
+                *ngFor="let color of product.color"
+                class="color-circle"
+                [ngStyle]="{ backgroundColor: color }"
+                [title]="color"
+              ></span>
+          </li>
+          <li><strong>Category:</strong> {{ product.category }}</li>
+          <li><strong>Sub-Category:</strong> {{ product.subcategory }}</li>
+          <li><strong>Brand:</strong> {{ product.brand }}</li>
+          <li><strong>Quantity Available:</strong> {{ product.stock }}</li>
+        </ul>
+        <button class="action-btn">Buy Now</button>
+      </div>
+    </div>
+  </div>
 </div>
-  

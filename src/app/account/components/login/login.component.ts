@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
           console.log('Login successful', response);
 
           const user = JSON.parse(localStorage.getItem('user') || '{}');
-
+          console.log(user);
           const isAdmin = user.isAdmin;
           localStorage.setItem('isAdmin' , JSON.stringify(isAdmin));
 

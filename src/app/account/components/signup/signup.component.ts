@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
       this.authService.signUp(this.myForm.value).subscribe({
         next: (response) => {
           console.log('User created successfully', response);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/account/login']);
         },
         error: (error) => {
           console.error('Error occurred during sign up', error);

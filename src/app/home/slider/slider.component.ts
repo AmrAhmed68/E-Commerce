@@ -16,7 +16,7 @@ export class SliderComponent implements OnInit {
   }
 
   getImages(): void {
-    this.http.get<any[]>('http://localhost:5000/api/auth/photos')
+    this.http.get<any[]>('http://localhost:5000/api/auth/slider')
       .subscribe(data => {
         this.images = data;
       });

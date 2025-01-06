@@ -23,11 +23,13 @@ export class AuthServices {
   getProfile(): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.baseUrl}/getProfile`, { headers });
+    return this.http.get<any>(`${this.baseUrl}/users/${localStorage.getItem('id')}`, { headers });
   }
 
   // Update user profile data
   updateProfile(profileData: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/updateProfile`, profileData);
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.baseUrl}/updateProfile/${localStorage.getItem('id')}`, profileData , { headers });
   }
 }

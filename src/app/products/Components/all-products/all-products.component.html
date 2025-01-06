@@ -8,10 +8,15 @@
 
 <div class="products-container">
   <div class="product-card" *ngFor="let product of filteredProducts">
-    <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" (click)="viewProductDetails(product._id)">
+    <div class="product-image-container">
+      <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" (click)="viewProductDetails(product._id)">
+      <button class="favorite-btn" >
+        <i class="fas fa-heart"></i>
+      </button>
+    </div>
     <div class="product-details">
       <h2 class="product-title">{{ product.name }}</h2>
-      <p class="product-description">{{ product.description }}</p>
+      <p class="product-description">{{ product.brand }}</p>
       <p class="product-price">{{ product.price | currency }}</p>
       <button class="add-to-cart-btn" (click)="addToCart(product)">
         <i class="fas fa-shopping-cart"></i> Add to Cart
@@ -19,3 +24,5 @@
     </div>
   </div>
 </div>
+
+

@@ -21,6 +21,7 @@ import { ProfileComponent } from './account/components/profile/profile.component
 import { AdminComponent } from './admin/admin.component';
 import { ProductsComponent } from './admin/products/products.component';
 import { SectionsComponent } from './home/sections/sections.component';
+import { FooterComponent } from './home/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SectionsComponent } from './home/sections/sections.component';
     AdminComponent,
     ProductsComponent,
     SectionsComponent,
+    FooterComponent,
    ],
   imports: [
     BrowserModule,

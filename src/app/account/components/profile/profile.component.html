@@ -17,6 +17,12 @@
       <input type="tel" id="phone" [(ngModel)]="profile.phone" name="phone" />
     </div>
 
+    <div class="form-group">
+      <label for="age">age:</label>
+      <input type="tel" id="age" [(ngModel)]="profile.age" name="age" />
+    </div>
+
+
     <button type="submit" class="btn btn-primary">Update Profile</button>
     <button type="button" class="btn btn-primary" (click)="logout()">Logout</button>
   </form>

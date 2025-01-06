@@ -16,42 +16,19 @@ export class AuthService {
 
   private apiUrl = 'http://localhost:5000/api/auth';
 
-  // login(credentials : any ): Observable<any> {
-  //   return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
-  //     tap((response: any) => {
-  //       if (response.token) {
-  //         localStorage.setItem('authToken', response.token);
-  //         localStorage.setItem('user', JSON.stringify(response.user));
-  //         localStorage.setItem('isAdmin' , JSON.stringify(response.isAdmin))
-  //       }
-  //     })
-  //   );
-  // }
-
   login(credentials : any ): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
       tap((response: any) => {
+        console.log(response);
         if (response.token) {
+          localStorage.setItem('id' , response.id);
           localStorage.setItem('authToken', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('isAdmin', JSON.stringify(response.isAdmin));
-
-          // Notify subscribers that login has occurred
           this.authStatus.next(true);
         }
       })
     );
-  }
-
-
-  getLogo(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/logo`);
-  }
-
-  uploadLogo(data: { imageUrl: string }): Observable<any> {
-    const token = localStorage.getItem('authToken');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.apiUrl}/uploads`, data , {headers});
   }
 
   getUser(): any {
@@ -63,7 +40,7 @@ export class AuthService {
   }
 
   getUserData(): any {
-    return this.http.get(`${this.apiUrl}/users`)
+    return this.http.get(`${this.apiUrl}/users/:${this.getUser()._id}`);
   }
 
   updateUser(profileData: any): Observable<any> {
@@ -87,8 +64,7 @@ export class AuthService {
 
   logout() {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
+    localStorage.clear()
     this.authStatus.next(false);
     this.router.navigate(['/home']);
     }

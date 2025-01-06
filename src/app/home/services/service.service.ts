@@ -8,20 +8,21 @@ import { catchError, Observable, of } from 'rxjs';
 export class PhotoService {
 
   private apiUrl = 'http://localhost:5000/api/auth/photos';
-  private apiUrl1 = 'http://localhost:5000/api/auth/product';
+  private apiUrl1 = 'http://localhost:5000/api/auth/section';
+  handleError: any;
 
 
   constructor(private http: HttpClient) { }
 
   getProducts(subCategory: string): Observable<any> {
-    return this.http.get(`${this.apiUrl1}?subCategory=${subCategory}`);
+    return this.http.get(`${this.apiUrl1}/${subCategory}`)
   }
 
   getPhotos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl).pipe(
       catchError(error => {
         console.error('Error fetching images', error);
-        return of([]); // Return an empty array on error
+        return of([]);
       })
     );
   }

@@ -29,14 +29,11 @@ export class HeaderComponent implements OnInit {
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.currentRoute = this.router.url;
-      this.updateVisibility();
     });
 
     this.cartService.cartCount$.subscribe(count => {
       this.cartCount = count;
     });
-
-    this.fetchLogo();
 
     this.authService.authStatus$.subscribe(status => {
       if (status) {
@@ -54,33 +51,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  fetchLogo(): void {
-    this.authService.getLogo().subscribe(
-      response => {
-        this.logoUrl = response.imageUrl; // Assuming imageUrl is the field name
-      },
-      error => {
-        console.error('Error fetching logo:', error);
-      }
-    );
-  }
-
-  onSubmit(): void {
-    const formData = {
-      imageUrl: this.logoUrl,
-    };
-
-    this.authService.uploadLogo(formData).subscribe(
-      response => {
-        console.log('Logo uploaded successfully:', response);
-        this.logoUrl = '';
-      },
-      error => {
-        console.error('Error uploading logo:', error);
-      }
-    );
-  }
-
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
@@ -93,13 +63,7 @@ export class HeaderComponent implements OnInit {
     this.authService.authStatus$.subscribe(isLoggedIn => {
       this.username = isLoggedIn ? this.authService.getUser()?.username : null;
       this.isAdmin = isLoggedIn ? JSON.parse(localStorage.getItem('user') || '{}').isAdmin === true : false;
-      this.updateVisibility();
     });
-  }
-
-  updateVisibility() {
-    const excludedRoutes = ['/account/login', '/account/signup', '/account/profile'];
-    this.showSearchBar = !excludedRoutes.includes(this.currentRoute);
   }
 
   toggleProfileDropdown() {

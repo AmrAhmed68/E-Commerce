@@ -1,40 +1,49 @@
-const express = require('express');
+const express = require("express");
 const routers = express.Router();
-const passport = require('passport');
-const authController = require('../controllers/auth.controller');
-const logoController = require('../controllers/logo.controller');
-const productController = require('../controllers/product.controller');
-const photoController = require('../controllers/photo.controller'); 
-const { ensureAuthenticated, ensureAdmin } = require('../middleware/adminCheck');
-const authenticateToken = require('../middleware/auth');
-const upload = require('../middleware/multer');
+const passport = require("passport");
+const authController = require("../controllers/auth.controller");
+const productController = require("../controllers/product.controller");
+const {ensureAuthenticated,ensureAdmin} = require("../middleware/adminCheck");
+const authenticateToken = require("../middleware/auth");
+const upload = require("../middleware/multer");
 
-routers.post('/signup', authController.register);
-routers.post('/login', passport.authenticate('local'), authController.login);
-routers.put('/updateProfile',authenticateToken,  authController.updateUserProfile);
-routers.get('/getProfile',authenticateToken,  authController.getUserProfile);
-routers.get('/users/:id', authenticateToken, authController.getUserById); 
-routers.post('/logout', authController.logout);
-routers.get('/dashboard', authController.isLoggedIn , (req, res) => {
-    res.json({ message: 'Welcome to the dashboard', user: req.user });
-  });
+// User
 
+routers.get("/users/:id", authenticateToken, authController.getUserById);
+routers.get("/photo/:id", authController.getUserPhoto);
+routers.post("/register", authController.register);
+routers.post("/checkUnique", authController.checkUniqueFields);
+routers.post("/login", passport.authenticate("local"), authController.login);
+routers.post("/photo/:id",upload.single("profilePhoto"),authController.uploadPhoto);
+routers.put("/updateProfile/:id",authenticateToken,authController.updateUserProfile);
 
 // Product Routes
-routers.get('/products', productController.getAllProducts);
-routers.get('/product', productController.getProducts);
-routers.get('/products/:id', productController.getProductById);
-routers.post('/products', ensureAuthenticated, ensureAdmin, productController.addProduct);
-routers.post('/card' , productController.card);
-routers.put('/products/:id', ensureAuthenticated, ensureAdmin, productController.updateProduct);
-routers.delete('/products/:id', ensureAuthenticated, ensureAdmin, productController.deleteProduct);
+routers.get("/products", productController.getAllProducts);
+routers.get("/categories", productController.getAllCategories);
+routers.get("/subcategory/:categoryName/:subcategoryName", productController.getSubCategory);
+routers.get("/subcategory/:categoryName", productController.getCategory);
+routers.get("/products/:id", productController.getProductById);
+routers.post('/:productId/reviews',productController.reviews);
+routers.get('/:productId/reviews',productController.getReviews);
+routers.post("/products",ensureAuthenticated,ensureAdmin,productController.addProduct);
+routers.post("/slider",ensureAuthenticated,ensureAdmin,productController.addPhoto);
+routers.delete("/slider/:id",ensureAuthenticated,ensureAdmin,productController.removePhoto);
+routers.get("/slider", productController.getAllPhoto);
+routers.get("/section/:section", productController.getSections);
+routers.put("/section",ensureAuthenticated,ensureAdmin , productController.addTOSection);
+routers.post("/categories",ensureAuthenticated,ensureAdmin ,productController.addCategory);
+routers.put("/products/:id",ensureAuthenticated,ensureAdmin,productController.updateProduct);
+routers.delete("/products/:id",ensureAuthenticated,ensureAdmin,productController.deleteProduct);
 
-routers.get('/photos', photoController.getAllPhotos);
-routers.post('/photos', photoController.uploadPhoto);
+routers.get("/favourite/:userId", productController.getFavourite);
+routers.get("/:userId/favourite/:productId", productController.getFavouriteId);
+routers.post("/favourite/:userId",productController.addFavourite);
+routers.delete("/favourite/:userId/:productId",productController.removeFavourite);
 
-
-routers.post('/uploads', ensureAuthenticated, ensureAdmin  , upload.single('Image'),logoController.uploadPhoto)
-routers.get('/logo', logoController.getLogo);
-
+routers.post("/:userId/cart", productController.addCart);
+routers.put('/:userId/cart', productController.updateCartQuantity);
+routers.get("/:userId/cart", productController.getCart);
+routers.get("/:userId/cart/:productId", productController.getCartId);
+routers.delete("/:userId/cart/:productId", productController.removeCart);
 
 module.exports = routers;

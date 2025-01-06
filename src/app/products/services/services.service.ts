@@ -10,8 +10,8 @@ export class ProductService {
   private cartItems = new BehaviorSubject<any[]>([]); // Holds the cart items
   cartItems$ = this.cartItems.asObservable(); // Observable for components to subscribe
 
-  private apiUrl = 'http://localhost:5000/api/auth/products';
-  private baseUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = 'https://e-commerce-data-one.vercel.app/api/products';
+  private baseUrl = 'https://e-commerce-data-one.vercel.app/api';
 
   constructor(private http: HttpClient) { }
 

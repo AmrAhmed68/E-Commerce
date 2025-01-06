@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ServicesService {
-  private apiUrl = 'http://localhost:5000/api/auth/products';
+  private apiUrl = 'https://e-commerce-data-one.vercel.app/api/products';
 
   constructor(private http: HttpClient) {}
 
@@ -37,5 +37,5 @@ export class ServicesService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<any>(`${this.apiUrl}/${productId}`, { headers });
   }
-  
+
 }

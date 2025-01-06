@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthServices {
 
-  private baseUrl = 'http://localhost:5000/api/auth';
+  private baseUrl = 'https://e-commerce-data-one.vercel.app/api';
 
   constructor(private http: HttpClient) {}
 

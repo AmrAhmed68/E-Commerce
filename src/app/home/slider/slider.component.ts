@@ -16,7 +16,7 @@ export class SliderComponent implements OnInit {
   }
 
   getImages(): void {
-    this.http.get<any[]>('http://localhost:5000/api/auth/slider')
+    this.http.get<any[]>('https://e-commerce-data-one.vercel.app/api/slider')
       .subscribe(data => {
         this.images = data;
       });

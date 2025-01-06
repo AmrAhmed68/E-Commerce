@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient , private router : Router) {}
 
 
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = 'https://e-commerce-data-one.vercel.app/api';
 
   login(credentials : any ): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(

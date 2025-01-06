@@ -7,8 +7,8 @@ import { catchError, Observable, of } from 'rxjs';
 })
 export class PhotoService {
 
-  private apiUrl = 'http://localhost:5000/api/auth/photos';
-  private apiUrl1 = 'http://localhost:5000/api/auth/section';
+  private apiUrl = 'https://e-commerce-data-one.vercel.app/api/photos';
+  private apiUrl1 = 'https://e-commerce-data-one.vercel.app/api/section';
   handleError: any;
 
 
@@ -27,5 +27,5 @@ export class PhotoService {
     );
   }
 
-  
+
 }

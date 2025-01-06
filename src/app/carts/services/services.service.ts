@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServicesService {
 
-  private apiUrl = 'http://localhost:5000/api/auth'; // Adjust URL as needed
+  private apiUrl = 'https://e-commerce-data-one.vercel.app/api'; // Adjust URL as needed
   private cartCount = new BehaviorSubject<number>(0);
 
   cartCount$ = this.cartCount.asObservable();

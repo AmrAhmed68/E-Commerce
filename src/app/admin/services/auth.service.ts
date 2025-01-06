@@ -10,7 +10,7 @@ export class AuthService {
   private authStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
   authStatus$ = this.authStatus.asObservable();
 
-  private apiUrl = 'http://localhost:5000/api/auth'; // Replace with your API endpoint
+  private apiUrl = 'https://e-commerce-data-one.vercel.app/api'; // Replace with your API endpoint
 
   constructor(private http: HttpClient) {}
 

@@ -21,7 +21,7 @@
   .img{
     display: flex;
     align-items: center;
-    max-width: 5%;
+    max-width: 6%;
   }
 
   .nav {
@@ -118,39 +118,50 @@
 
   @media (max-width: 768px) {
     .header-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .logo {
-      margin-left: 0;
-      margin-right: auto;
-      text-align: right;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between; /* Ensures space between logo and toggle */
       width: 100%;
     }
 
-    .nav {
-      display: none;
+    .img {
+      max-width: 10%;
+      flex: 0 0 auto; /* Ensures the logo stays its size */
     }
 
     .menu-toggle {
-      position: static;
-      margin-bottom: 15px;
+      display: block; /* Shows the toggle icon */
+      cursor: pointer;
     }
 
-    .search-bar {
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 18px;
+    }
+
+    .hamburger span {
+      display: block;
       width: 100%;
-      margin: 10px 0;
+      height: 3px;
+      background-color: #333;
+      border-radius: 2px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav {
+      display: none; /* Hides navigation links on smaller screens */
+    }
+
+    .header-actions {
+      display: none; /* Optionally hide actions on mobile */
     }
 
     .header-actions .account,
     .header-actions .cart {
       margin-left: 10px;
-    }
-
-    .header-actions {
-      width: 100%;
-      justify-content: space-between;
     }
 
     .cart {

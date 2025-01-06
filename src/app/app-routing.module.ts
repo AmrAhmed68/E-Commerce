@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './account/components/profile/profile.component';
 import { ProductsComponent } from './admin/products/products.component';
 import { AdminComponent  } from './admin/admin.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path : "product/:id" , component:ProductsDetailsComponent},
   {path : "admin" , component:AdminComponent},
   {path : "adminproducts" , component:ProductsComponent},
+  {path : "contact" , component:ContactUsComponent},
   { path: 'account/login', component: LoginComponent },
   { path: 'account/signup', component: SignupComponent },
   { path: 'account/profile', component: ProfileComponent },

@@ -1,6 +1,6 @@
 // cart.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../..//services/services.service'; // Adjust path as needed
+import { ProductService } from '../../../products/services/services.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,22 +8,66 @@ import { ServicesService } from '../..//services/services.service'; // Adjust pa
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: any[] = [];
+  loading: boolean = false;
+  userId : any = localStorage.getItem('id');
+  cart: any[] = [];
+  totalPrice: number = 0;    // Stores the total price
 
-  constructor(private cartService: ServicesService) {}
+
+  constructor( private productService: ProductService ) {}
 
   ngOnInit(): void {
-    // In a real application, you might get the cart items from a server
-    this.cartItems = this.cartService.getCartItems(); // Adjust this method as needed
+    this.loadCart();
   }
 
-  removeFromCart(item: any): void {
-    // Implement the method to remove an item from the cart
-    this.cartService.removeFromCart(item);
-    this.cartItems = this.cartService.getCartItems();
+  // Load cart items
+  loadCart() {
+    this.loading = true;  // Set loading to true when the request starts
+
+    this.productService.getCart(this.userId).subscribe(
+      (response) => {
+        this.cart = response;
+        this.calculateTotalPrice();
+        this.loading = false;  // Set loading to false when the request finishes
+      },
+      (error) => {
+        console.error('Error loading cart:', error);
+        this.loading = false;  // Set loading to false in case of error
+      }
+    );
   }
 
-  getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.price, 0);
+  // Calculate total price
+  calculateTotalPrice(): void {
+    this.totalPrice = this.cart.reduce((total, item) => total + item.productId.price * item.quantity, 0);
   }
-}
+
+  // Method to update quantity
+  updateQuantity(productId: string, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const quantity = Number(input.value);
+
+    if (quantity < 1) {
+      alert('Quantity must be at least 1');
+      return;
+    }
+
+    this.loading = true;  // Set loading to true when the update starts
+
+    this.productService.updateCartQuantity(this.userId, productId, quantity).subscribe(
+      () => {
+        this.loadCart();
+      },
+      (error) => {
+        console.error('Error updating cart:', error);
+        this.loading = false;  // Set loading to false in case of error
+      }
+    );
+  }
+  removeFromCart(productId: string): void {
+    this.productService.removeFromCart(this.userId, productId).subscribe(() => {
+      this.loadCart();
+    });
+  }
+
+  }

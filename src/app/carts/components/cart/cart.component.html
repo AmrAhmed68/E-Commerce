@@ -1,19 +1,31 @@
-<!-- cart.component.html -->
-<div class="cart-container">
-  <h1>Your Cart</h1>
-  <div *ngIf="cartItems.length === 0">Your cart is empty</div>
-  <div *ngIf="cartItems.length > 0">
-    <div class="cart-item" *ngFor="let item of cartItems">
-      <img [src]="item.imageUrl" alt="{{ item.name }}" class="cart-item-image">
+<div *ngIf="loading" class="loading-overlay">
+  <div class="spinner"></div>
+</div>
+
+<div class="cart-container && cart.length > 0" *ngIf="!loading">
+  <h2 class="cart-title">Your Cart</h2>
+  <h2 class="cart-title"> Total Price: {{ totalPrice | currency }}</h2>
+  <div *ngIf="cart.length > 0; else emptyCart">
+    <div *ngFor="let item of cart" class="cart-item">
+      <img [src]="item.productId.imageUrl" alt="{{ item.productId.name }}" class="cart-item-image" />
       <div class="cart-item-details">
-        <h2 class="cart-item-title">{{ item.name }}</h2>
-        <p class="cart-item-price">{{ item.price | currency }}</p>
-        <button (click)="removeFromCart(item)">Remove</button>
+        <h3>{{ item.productId.name }}</h3>
+        <p>Price: {{ item.productId.price | currency }}</p>
+        <p>Quantity:
+          <input
+          type="number"
+          [value]="item.quantity"
+          (change)="updateQuantity(item.productId._id, $event)"
+        />
+
+        </p>
+        <button (click)="removeFromCart(item.productId._id)">Remove</button>
       </div>
     </div>
-    <div class="cart-total">
-      <h2>Total: {{ getTotalPrice() | currency }}</h2>
-    </div>
   </div>
+  <ng-template #emptyCart>
+    <p>Your cart is empty!</p>
+  </ng-template>
 </div>
-  
+
+<app-footer></app-footer>
